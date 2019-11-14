@@ -2,19 +2,33 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Article;
 import com.example.demo.reponse.AjaxResponse;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
+
+/**
+ * 文章web控制类
+ */
 @Slf4j //打印日志
 @RestController
 @RequestMapping("/rest")
 public class ArticleRestController {
 
-    @RequestMapping(value = "/article", method = POST, produces = "application/json")
-    public AjaxResponse saveArticle(@RequestBody Article article) {
+//    @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Article",httpMethod = "POST")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "String"),
+//            @ApiImplicitParam(name = "content", value = "文章内容", required = true, dataType = "String"),
+//            @ApiImplicitParam(name = "author", value = "文章作者", required = true, dataType = "String")
+//    })
+//    @ApiResponses({
+//            @ApiResponse(code=200,message="成功",response=AjaxResponse.class),
+//    })
+    @PostMapping("/article")
+    public @ResponseBody AjaxResponse saveArticle(@RequestBody Article article) {
 
         log.info("saveArticle：{}",article);
         return  AjaxResponse.success(article);
