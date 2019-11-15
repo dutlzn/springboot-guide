@@ -16,17 +16,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Slf4j //打印日志
 @RestController
 @RequestMapping("/rest")
+@Api(description = "文章操作api")
 public class ArticleRestController {
 
-//    @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Article",httpMethod = "POST")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "String"),
-//            @ApiImplicitParam(name = "content", value = "文章内容", required = true, dataType = "String"),
-//            @ApiImplicitParam(name = "author", value = "文章作者", required = true, dataType = "String")
-//    })
-//    @ApiResponses({
-//            @ApiResponse(code=200,message="成功",response=AjaxResponse.class),
-//    })
+    @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Article",httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "content", value = "文章内容", required = true, dataType = "string"),
+            @ApiImplicitParam(name = "author", value = "文章作者", required = true, dataType = "string")
+    })
+    @ApiResponses({
+            @ApiResponse(code=200,message="成功",response=AjaxResponse.class),
+    })
     @PostMapping("/article")
     public @ResponseBody AjaxResponse saveArticle(@RequestBody Article article) {
 
