@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Article;
 import com.example.demo.reponse.AjaxResponse;
+import com.example.demo.service.impl.ArticleRestJDBCService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -19,18 +21,21 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Api(description = "文章操作api")
 public class ArticleRestController {
 
-    @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Article",httpMethod = "POST")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "string"),
-            @ApiImplicitParam(name = "content", value = "文章内容", required = true, dataType = "string"),
-            @ApiImplicitParam(name = "author", value = "文章作者", required = true, dataType = "string")
-    })
-    @ApiResponses({
-            @ApiResponse(code=200,message="成功",response=AjaxResponse.class),
-    })
+    @Autowired
+    private ArticleRestJDBCService articleRestJDBCService;
+
+//    @ApiOperation(value = "添加文章", notes = "添加新的文章", tags = "Article",httpMethod = "POST")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "title", value = "文章标题", required = true, dataType = "string"),
+//            @ApiImplicitParam(name = "content", value = "文章内容", required = true, dataType = "string"),
+//            @ApiImplicitParam(name = "author", value = "文章作者", required = true, dataType = "string")
+//    })
+//    @ApiResponses({
+//            @ApiResponse(code=200,message="成功",response=AjaxResponse.class),
+//    })
     @PostMapping("/article")
     public @ResponseBody AjaxResponse saveArticle(@RequestBody Article article) {
-
+        Article article1= articleRestJDBCService.saveArticle(article);
         log.info("saveArticle：{}",article);
         return  AjaxResponse.success(article);
     }
