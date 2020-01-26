@@ -26,7 +26,7 @@ public class HelloServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();// 服务启动类
             serverBootstrap.group(bossGroup, workerGroup) // 设置主从线程组
                     .channel(NioServerSocketChannel.class) // 设置nio的双向通道
-                    .childHandler(null); // 子处理器，用于处理workerGroup
+                    .childHandler(new HelloServerInitializer()); // 子处理器，用于处理workerGroup
 
             // 启动server，并且设置8088为启动端口号，同时启动方式为同步
             ChannelFuture channelFuture = serverBootstrap.bind(8088).sync();

@@ -20,6 +20,6 @@ public class HelloServerInitializer extends ChannelInitializer<SocketChannel> {
         pipline.addLast("HttpServerCodec", new HttpServerCodec());
 
         // 添加自定义的助手类，返回“hello netty"
-        pipline.addLast("customHandler", null);
+        pipline.addLast("customHandler", new CustomHandler());
     }
 }
