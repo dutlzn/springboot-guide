@@ -27,20 +27,20 @@
 	
 	<nav class="mui-bar mui-bar-tab">
 		
-	    <a class="mui-tab-item mui-active">
+	    <a class="mui-tab-item mui-active"tabindex="0">
 	        <span class="mui-icon mui-icon-chat"></span>
 	        <!--<span class="mui-icon iconfont icon-weixin "></span>-->
 	        <span class="mui-tab-label">飞鸽传书</span>
 	    </a>
-	    <a class="mui-tab-item">
+	    <a class="mui-tab-item" tabindex="1">
 	        <span class="mui-icon mui-icon-phone"></span>
 	        <span class="mui-tab-label">通讯录</span>
 	    </a>
-	    <a class="mui-tab-item">
+	    <a class="mui-tab-item" tabindex="2">
 	        <span class="mui-icon mui-icon-paperplane"></span>
 	        <span class="mui-tab-label">发现</span>
 	    </a>
-	    <a class="mui-tab-item">
+	    <a class="mui-tab-item" tabindex="3">
 	        <span class="mui-icon mui-icon-person"></span>
 	        <span class="mui-tab-label">我</span>
 	    </a>
@@ -88,6 +88,20 @@
 	   		
 	   	}
 	   	plus.webview.show(feigeArray[0].pageId); //plus之类的是设备 需要真机测试
+	   	
+	   	// 批量绑定tap事件 展示不同的webview
+	   	mui(".mui-bar-tab").on("tap", "a", function(){
+	   		var tabindex = this.getAttribute("tabindex");
+	   		// 显示点击tab选项对应的页面
+	   		plus.webview.show(feigeArray[tabindex].pageId,"fade-in",150);
+	   		
+	   		// 隐藏其他不需要的页面
+	   	    for(var i=0;i<feigeArray.length;i++) {
+	   	    	if(i != tabindex){
+	   	    		plus.webview.hide(feigeArray[i].pageId,"fade-out",150);
+	   	    	}
+	   	    }
+	   	});
 	   });
 	   
 	   
