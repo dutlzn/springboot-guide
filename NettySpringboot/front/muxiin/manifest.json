@@ -125,5 +125,40 @@
 				}
 			}
 		}
+	},
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"feige-chatlist.html"
+				],
+				"refer": [
+					"feige-me.html",
+					"feige-contact.html",
+					"feige-discover.html"
+				],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"font_icon/iconfont.js",
+				"font_icon/iconfont.woff2",
+				"fonts/mui.ttf",
+				"css/mui.css",
+				"font_icon/demo.css",
+				"css/header.css",
+				"font_icon/iconfont.json",
+				"font_icon/iconfont.woff",
+				"font_icon/iconfont.css",
+				"js/mui.min.js",
+				"css/mui.min.css",
+				"font_icon/iconfont.svg",
+				"font_icon/iconfont.ttf",
+				"js/mui.js",
+				"font_icon/demo_index.html",
+				"font_icon/iconfont.eot"
+			]
+		}
 	}
 }

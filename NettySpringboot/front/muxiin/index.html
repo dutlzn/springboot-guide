@@ -45,5 +45,54 @@
 	        <span class="mui-tab-label">我</span>
 	    </a>
 	</nav>
+	
+	
+	<script type="text/javascript">
+		var feigeArray = [
+			{
+				pageId: "feige-chatlist.html",
+				pageUrl:"feige-chatlist.html",
+			},
+			{
+				pageId: "feige-contact.html",
+				pageUrl:"feige-contact.html",
+			},
+			{
+				pageId: "feige-discover.html",
+				pageUrl:"feige-discover.html",
+			},
+			{
+				pageId: "feige-me.html",
+				pageUrl:"feige-me.html",
+			},
+		];
+		
+		var feigeStyle = {
+			top: "44px",
+			bottom: "50px",
+		}
+		
+	   mui.plusReady(function(){
+	   	// 获取当前webview对象
+	   	var indexWebview = plus.webview.currentWebview();
+	   	// 向当前主页webview追加子页的4张webview
+	   	for(var i=0;i<feigeArray.length;i++) {
+	   		var feigePage = plus.webview.create(
+	   			feigeArray[i].pageUrl, 
+	   			feigeArray[i].pageId,
+	   			feigeStyle
+	   		);
+	   		feigePage.hide();// 页面隐藏
+	   		// 追加每一个子页面到当前主页面
+	   		indexWebview.append(feigePage);
+	   		
+	   	}
+	   	plus.webview.show(feigeArray[0].pageId); //plus之类的是设备 需要真机测试
+	   });
+	   
+	   
+	</script>
+	
+	
 </body>
 </html>

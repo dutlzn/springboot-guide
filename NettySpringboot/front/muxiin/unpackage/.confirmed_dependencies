@@ -1,0 +1,13 @@
+{
+	"index.html": {
+		"resources": [
+			"feige-chatlist.html"
+		],
+		"refer": [
+			"feige-chatlist.html",
+			"feige-me.html",
+			"feige-contact.html",
+			"feige-discover.html"
+		]
+	}
+}
