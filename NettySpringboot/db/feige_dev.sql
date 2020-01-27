@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 27/01/2020 20:32:20
+ Date: 27/01/2020 23:59:50
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `chat_msg`  (
   `accept_user_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `msg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `sign_flag` int(1) NOT NULL,
-  `creat_time` datetime(0) not NULL,
+  `creat_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
