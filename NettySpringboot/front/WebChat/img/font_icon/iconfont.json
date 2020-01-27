@@ -1,0 +1,23 @@
+{
+  "id": "1622143",
+  "name": "muxin",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "9768040",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "11962035",
+      "name": "朋友圈",
+      "font_class": "pengyouquan",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    }
+  ]
+}
