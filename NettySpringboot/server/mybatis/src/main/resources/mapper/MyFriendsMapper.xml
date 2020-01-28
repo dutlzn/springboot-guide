@@ -7,6 +7,6 @@
     -->
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="my_user_id" jdbcType="VARCHAR" property="myUserId" />
-    <result column="my_friends_user_id" jdbcType="VARCHAR" property="myFriendsUserId" />
+    <result column="my_friend_user_id" jdbcType="VARCHAR" property="myFriendUserId" />
   </resultMap>
 </mapper>

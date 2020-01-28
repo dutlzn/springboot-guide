@@ -1,4 +1,4 @@
-package feige.pojo;
+package com.lzn.pojo;
 
 import java.util.Date;
 import javax.persistence.*;

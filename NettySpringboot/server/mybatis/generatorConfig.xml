@@ -29,6 +29,7 @@
 
 
 		<table tableName="users"></table>
+        <table tableName="users_copy"></table>
 		<table tableName="my_friends"></table>
 		<table tableName="friends_request"></table>
 		<table tableName="chat_msg"></table>
