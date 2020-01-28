@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 27/01/2020 23:59:50
+ Date: 28/01/2020 10:28:08
 */
 
 SET NAMES utf8mb4;
@@ -39,7 +39,7 @@ CREATE TABLE `friends_request`  (
   `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `send_user_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `accept_user_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `request_data_time` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `request_data_time` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
