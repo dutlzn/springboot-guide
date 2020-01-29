@@ -41,8 +41,7 @@ window.app = {
 	 * 获取用户的全局对象
 	 */
 	getUserGlobalInfo: function() {
-		var userInfoStr= plus.storage.getItem("userInfo");
-		return userInfo;
-		
+		var userInfoStr = plus.storage.getItem("userInfo");
+		return JSON.parse(userInfoStr);
 	}
 }
