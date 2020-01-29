@@ -35,6 +35,8 @@ window.app = {
 	 */
 	setUserGlobalInfo: function(user) {
 		var userInfoStr = JSON.stringify(user);
+		console.log("set");
+		console.log(userInfoStr);
 		plus.storage.setItem("userInfo", userInfoStr);
 	},
 	/**
@@ -42,6 +44,17 @@ window.app = {
 	 */
 	getUserGlobalInfo: function() {
 		var userInfoStr = plus.storage.getItem("userInfo");
+		console.log("get");
+		console.log(userInfoStr);
+//		return userInfoStr;
 		return JSON.parse(userInfoStr);
+
+	},
+	
+	/**
+	 * 清除所有的缓存
+	 */
+	clearUserGlobalInfo: function(){
+		plus.storage.clear();
 	}
 }

@@ -51,7 +51,7 @@
 				<div class="wrap-login100 p-t-85 p-b-20">
 					<form id="userform">
 						<span class="login100-form-title p-b-70">
-							<h5>飞鸽传书'</h5>
+							<h5>Netty 实战</h5>
 						</span>
 						<span class="login100-form-avatar">
 							<img id="img_login_face" src="css/registLogin/arrow.jpg" alt="风间影月">
@@ -68,7 +68,7 @@
 						</div>
 						<div class="container-login100-form-btn">
 							<button type="submit" id="registOrLogin" class="login100-form-btn">
-								登录/注册
+								登录/注册1
 							</button>
 						</div>
 					</form>
@@ -81,14 +81,16 @@
 			
 			mui.plusReady(function() {
 				
-				// 判断用户是否注册登录过，如果本地内存有全局的用户对象，此时直接跳转到首页
+//				// 判断用户是否注册登录过，如果本地内存有全局的用户对象，此时直接跳转到首页
+//              app.clearUserGlobalInfo();
 				var userInfo = app.getUserGlobalInfo();
+				
 				if (userInfo != null) {
-					console.log(userInfo);
+					console.log(userInfo.value);
 					// 页面跳转
 					mui.openWindow("index.html", "index.html");
 				}
-				
+//				
 				var userform = document.getElementById("userform");
 				var username = document.getElementById("username");
 				var txt_password = document.getElementById("txt_password");
