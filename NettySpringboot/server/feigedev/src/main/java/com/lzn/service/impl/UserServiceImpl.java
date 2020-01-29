@@ -1,9 +1,10 @@
 package com.lzn.service.impl;
 
 import com.lzn.mapper.UsersMapper;
+import com.lzn.org.n3r.idworker.Sid;
 import com.lzn.pojo.Users;
 import com.lzn.service.UserService;
-import org.n3r.idworker.Sid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,15 +19,18 @@ public class UserServiceImpl implements UserService {
     private UsersMapper usersMapper;
     @Autowired
     private Sid sid;
-
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public boolean queryUsernameIsExist(String username) {
+
         Users user = new Users();
         user.setUsername(username);
-        Users result = usersMapper.selectOne(user); // 用户名是唯一的
-        return result != null?true:false;
+
+        Users result = usersMapper.selectOne(user);
+
+        return result != null ? true : false;
     }
+
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Users queryUserForLogin(String username, String pwd) {

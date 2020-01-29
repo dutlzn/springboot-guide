@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("u")
+@RequestMapping("")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -25,33 +25,35 @@ public class UserController {
      */
     @PostMapping("/registOrLogin")
     public IMoocJSONResult registOrLogin(@RequestBody Users user) throws Exception {
-        // 0.判断用户名和密码不能为空
+
+        // 0. 判断用户名和密码不能为空
         if (StringUtils.isBlank(user.getUsername())
-            || StringUtils.isBlank(user.getPassword())){
-            return IMoocJSONResult.errorMsg("用户名或密码不能为空");
+                || StringUtils.isBlank(user.getPassword())) {
+            return IMoocJSONResult.errorMsg("用户名或密码不能为空...");
         }
+
         // 1. 判断用户名是否存在，如果存在就登录，如果不存在则注册
         boolean usernameIsExist = userService.queryUsernameIsExist(user.getUsername());
         Users userResult = null;
-        if(usernameIsExist) {
+        if (usernameIsExist) {
             // 1.1 登录
             userResult = userService.queryUserForLogin(user.getUsername(),
                     MD5Utils.getMD5Str(user.getPassword()));
-            if(userResult == null){
-                return IMoocJSONResult.errorMsg("用户名或密码错误");
+            if (userResult == null) {
+                return IMoocJSONResult.errorMsg("用户名或密码不正确...");
             }
-        } else{
+        } else {
             // 1.2 注册
             user.setNickname(user.getUsername());
             user.setFaceImage("");
             user.setFaceImageBig("");
             user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
             userResult = userService.saveUser(user);
-            // 不能把这个数据直接返回前端 因为里面有没有用的数据
         }
-        UsersVO usersVO = new UsersVO();
-        BeanUtils.copyProperties(userResult, usersVO);
 
-        return IMoocJSONResult.ok();
+        UsersVO userVO = new UsersVO();
+        BeanUtils.copyProperties(userResult, userVO);
+
+        return IMoocJSONResult.ok(userVO);
     }
 }

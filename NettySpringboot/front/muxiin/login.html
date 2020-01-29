@@ -51,7 +51,7 @@
 				<div class="wrap-login100 p-t-85 p-b-20">
 					<form id="userform">
 						<span class="login100-form-title p-b-70">
-							<h5>Netty 实战</h5>
+							<h5>飞鸽传书</h5>
 						</span>
 						<span class="login100-form-avatar">
 							<img id="img_login_face" src="css/registLogin/arrow.jpg" alt="陆震宁头像">
@@ -68,7 +68,7 @@
 						</div>
 						<div class="container-login100-form-btn">
 							<button type="submit" id="registOrLogin" class="login100-form-btn">
-								登录/注册1
+								登录/注册
 							</button>
 						</div>
 					</form>
@@ -76,6 +76,63 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+//				alert("测试");
+				var userform = document.getElementById("userform");
+				var username = document.getElementById("username");
+				var txt_password = document.getElementById("txt_password");
+				// 点击按钮的时候 触发表单的提交
+				userform.addEventListener("submit", function(e){
+					// 判断用户名是否为空 如果为空 则让其获得焦点
+					if  (!app.isNotNull(username.value)){
+						//获取焦点
+						username.focus();
+					} else if(!app.isNotNull(txt_password.value)){
+							//获取焦点
+						txt_password.focus();
+					} else {
+						// 判断用户名和密码的长度
+						if(username.value.length>12) {
+//							alert("用户名长度不能超过12"); 不好看 
+							app.showToast("用户名不能超过12", "error");		
+							return false;
+						} else if (txt_password.value.length>12){
+//							alert("密码长度不能超过12");
+							app.showToast("密码不能超过12", "error");
+							return false;					
+						}
+						// 获取手机id
+						console.log("在干嘛");
+						var cid = plus.push.getClientInfo().clientid;
+						console.log(JSON.stringify(cid));
+						// 与后端联调 	
+						mui.ajax(app.serverUrl+"/registOrLogin",{
+								data:{
+									username: username.value,
+									password: txt_password.value,
+									cid: cid
+								},
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型
+								timeout:10000,//超时时间设置为10秒；
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									//服务器返回响应，根据响应结果，分析是否登录成功；
+									console.log(JSON.stringify(data));
+								},
+								error:function(xhr,type,errorThrown){
+									//异常处理；
+									console.log(type);
+								}
+							});
+					}
+				   // 阻止默认时间，阻止默认表单提交
+					e.preventDefault();
+				});
+			});
+		</script>
 	</body>
 
 </html>
