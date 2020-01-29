@@ -121,14 +121,28 @@
 								success:function(data){
 									//服务器返回响应，根据响应结果，分析是否登录成功；
 									console.log(JSON.stringify(data));
+									// 失去焦点
+									username.blur();
+									txt_password.blur();
+									
+									if(data.status == 200){
+//										// 登陆或者注册成功 保存全局用户对象到本地缓存
+										var userInfoJson = data.data;
+										app.setUserGlobalInfo(userInfoJson);
+										// 页面跳转
+										mui.openWindow("index.html", "index.html");					
+									} else {
+										app.showToast(data.msg, "error");
+									}
+							
 																
 								},
-								error:function(xhr,type,errorThrown){
-									//异常处理；
-									console.log(username.value);
-									console.log(username)
-//									console.log(type);
-								}
+//								error:function(xhr,type,errorThrown){
+//									//异常处理；
+//									console.log(username.value);
+//									console.log(username)
+////									console.log(type);
+//								}
 							});
 					}
 				   // 阻止默认时间，阻止默认表单提交
