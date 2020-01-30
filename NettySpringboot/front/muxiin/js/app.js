@@ -5,6 +5,12 @@ window.app = {
 	 */
 	serverUrl:'http://192.168.1.102:8080',
 	/**
+	 * 图片服务器url
+	 */
+	imgServerUrl:'',
+	
+	
+	/**
 	 * 判断字符串是否为空
 	 * @param {Object} str
 	 * true: 不为空
