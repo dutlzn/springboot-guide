@@ -1,7 +1,8 @@
 {
 	"index.html": {
 		"resources": [
-			"feige-chatlist.html"
+			"feige-chatlist.html",
+			"feige-discover.html"
 		],
 		"refer": [
 			"feige-chatlist.html",
@@ -13,6 +14,11 @@
 	"login.html": {
 		"refer": [
 			"index.html"
+		]
+	},
+	"feige-me.html": {
+		"refer": [
+			"myface.html"
 		]
 	}
 }

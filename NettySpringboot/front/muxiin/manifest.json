@@ -130,12 +130,12 @@
 		"pages": {
 			"index.html": {
 				"resources": [
-					"feige-chatlist.html"
+					"feige-chatlist.html",
+					"feige-discover.html"
 				],
 				"refer": [
 					"feige-me.html",
-					"feige-contact.html",
-					"feige-discover.html"
+					"feige-contact.html"
 				],
 				"priority": 0
 			},
@@ -143,6 +143,13 @@
 				"resources": [],
 				"refer": [
 					"index.html"
+				],
+				"priority": 0
+			},
+			"feige-me.html": {
+				"resources": [],
+				"refer": [
+					"myface.html"
 				],
 				"priority": 0
 			}
