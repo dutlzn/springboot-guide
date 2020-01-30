@@ -25,16 +25,16 @@
 		    <!-- 可选择菜单 -->
 		    <ul class="mui-table-view">
 		      <li class="mui-table-view-cell">
-		        <a href="#">选择照片</a>
+		        <a id="link_choosePhoto" href="#">选择照片</a>
 		      </li>
 		      <li class="mui-table-view-cell">
-		        <a href="#">下载照片</a>
+		        <a id="link_savePhoto" href="#">下载照片</a>
 		      </li>
 		    </ul>
 		    <!-- 取消菜单 -->
 		    <ul class="mui-table-view">
 		      <li class="mui-table-view-cell">
-		        <a href="#sheet1"><b>取消</b></a>
+		        <a href="#sheet-myface"><b>取消</b></a>
 		      </li>
 		    </ul>
 		</div>
@@ -60,6 +60,16 @@
 				var openMenu = document.getElementById("openMenu");
 				openMenu.addEventListener("tap", function(){
 					mui("#sheet-myface").popover("toggle");
+				});
+				// 绑定选择照片的菜单按钮
+				var link_choosePhoto = document.getElementById("link_choosePhoto");
+				link_choosePhoto.addEventListener("tap", function() {
+					
+				});
+				// 绑定保存照片的菜单按钮
+				var link_savePhoto = document.getElementById("link_savePhoto");
+				link_savePhoto.addEventListener("tap", function() {
+					
 				});
 			});
 		</script>
