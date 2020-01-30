@@ -24,5 +24,8 @@ public interface UserService {
      * @return
      */
     public Users saveUser(Users user);
-
+    /**
+     * @Description: 修改用户记录
+     */
+    public Users updateUserInfo(Users user);
 }

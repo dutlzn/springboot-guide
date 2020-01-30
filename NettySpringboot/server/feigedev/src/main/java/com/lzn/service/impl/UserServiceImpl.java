@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
     private UsersMapper usersMapper;
     @Autowired
     private Sid sid;
+
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public boolean queryUsernameIsExist(String username) {
@@ -53,5 +54,17 @@ public class UserServiceImpl implements UserService {
         user.setId(userId);
         usersMapper.insert(user);
         return user;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public Users updateUserInfo(Users user) {
+        usersMapper.updateByPrimaryKeySelective(user);
+        return queryUserById(user.getId());
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    private Users queryUserById(String userId) {
+        return usersMapper.selectByPrimaryKey(userId);
     }
 }
