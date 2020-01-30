@@ -62,9 +62,13 @@
 					mui("#sheet-myface").popover("toggle");
 				});
 				// 绑定选择照片的菜单按钮
-				var link_choosePhoto = document.getElementById("link_choosePhoto");
+			    var link_choosePhoto = document.getElementById("link_choosePhoto");
 				link_choosePhoto.addEventListener("tap", function() {
-					
+					mui.openWindow({
+						url: "plugin/v3.1.6/myface-uploader.html",
+						id:"myface-uploader.html",
+						});
+					mui("#sheet-myface").popover("toggle");
 				});
 				// 绑定保存照片的菜单按钮
 				var link_savePhoto = document.getElementById("link_savePhoto");
