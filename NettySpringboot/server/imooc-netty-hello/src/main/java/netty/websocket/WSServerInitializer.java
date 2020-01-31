@@ -22,7 +22,7 @@ public class WSServerInitializer extends ChannelInitializer<SocketChannel> {
         对httpmessage进行聚合，聚合成FullHttpRequest或者FullHttpResponse
         几乎在netty中的变成，都会使用这个handler
          */
-        pipeline.addLast(new HttpObjectAggregator(1024*64));
+        pipeline.addLast(new HttpObjectAggregator(1024 * 64));
         //=======================以上是用于支持http协议=================
         //=======================以下是支持httpWebsocket=================
         /**

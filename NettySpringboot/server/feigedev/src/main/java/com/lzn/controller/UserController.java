@@ -25,8 +25,10 @@ public class UserController {
     private UserService userService;
     @Autowired
     private FastDFSClient fastDFSClient;
+
     /**
      * 用户登陆/注册
+     *
      * @return
      */
     @PostMapping("/registOrLogin")
@@ -59,13 +61,14 @@ public class UserController {
         }
 
         UsersVO userVO = new UsersVO();
-        BeanUtils.copyProperties(userVO,userResult);
+        BeanUtils.copyProperties(userVO, userResult);
 
         return IMoocJSONResult.ok(userVO);
     }
 
     /**
      * 上传用户头像
+     *
      * @param userBO
      * @return
      * @throws Exception
@@ -74,7 +77,7 @@ public class UserController {
     public IMoocJSONResult uploadFaceBase64(@RequestBody UsersBO userBO) throws Exception {
         // 获取前端传过来的base64字符串 然后转换为文件对象在上传
         String base64Data = userBO.getFaceData();
-        String userFacePath = "D:\\"+userBO.getUserId()+"userface64.png";
+        String userFacePath = "D:\\" + userBO.getUserId() + "userface64.png";
         FileUtils.base64ToFile(userFacePath, base64Data);
 
         MultipartFile faceFile = FileUtils.fileToMultipart(userFacePath);

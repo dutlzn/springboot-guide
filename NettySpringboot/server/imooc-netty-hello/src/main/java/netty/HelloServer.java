@@ -21,7 +21,7 @@ public class HelloServer {
         // 从线程组，老板线程组会把任务丢给他，让手下线程组去做任务
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             // netty服务器的创建，ServerBootstrap是一个启动类
             ServerBootstrap serverBootstrap = new ServerBootstrap();// 服务启动类
             serverBootstrap.group(bossGroup, workerGroup) // 设置主从线程组

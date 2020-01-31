@@ -7,11 +7,11 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class WSServer {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         EventLoopGroup mainGroup = new NioEventLoopGroup();
         EventLoopGroup subGroup = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap server = new ServerBootstrap();
             server.group(mainGroup, subGroup)
                     .channel(NioServerSocketChannel.class)

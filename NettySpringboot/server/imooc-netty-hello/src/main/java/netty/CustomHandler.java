@@ -15,6 +15,7 @@ import io.netty.util.CharsetUtil;
 public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
     /**
      * channael的生命周期
+     *
      * @param ctx
      * @throws Exception
      */
@@ -72,7 +73,7 @@ public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
         // 获取channel
         Channel channel = ctx.channel();
 
-        if (msg instanceof  HttpRequest){
+        if (msg instanceof HttpRequest) {
 
             // 显示客户端的远程地址
             System.out.println(channel.remoteAddress());
