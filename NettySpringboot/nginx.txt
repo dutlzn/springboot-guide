@@ -1,0 +1,25 @@
+./configure \
+
+每prefix=/usr/local/nginx \
+
+每pid-path=/var/run/nginx/nginx.pid \
+
+每lock-path=/var/lock/nginx.lock \
+
+每error-log-path=/var/log/nginx/error.log \
+
+每http-log-path=/var/log/nginx/access.log \
+
+每with-http_gzip_static_module \
+
+每http-client-body-temp-path=/var/temp/nginx/client \
+
+每http-proxy-temp-path=/var/temp/nginx/proxy \
+
+每http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
+
+每http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
+
+每http-scgi-temp-path=/var/temp/nginx/scgi \
+
+每add-module=/root/fast/fastdfs-nginx-module/src
