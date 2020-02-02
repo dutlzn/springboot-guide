@@ -88,6 +88,11 @@
 				link_nickname.addEventListener("tap", function(){
 					mui.openWindow("mynickname.html", "mynickname.html")
 				})
+				//页面跳转 修改二维码
+				var link_my_qrcode = document.getElementById("link_my_qrcode");
+				link_my_qrcode.addEventListener("tap", function(){
+					mui.openWindow("myQRCode.html", "myQRCode.html")
+				})
 				// 添加自定义事件 刷新头像
 				window.addEventListener("refresh", function() {
 					refreshUserInfo();

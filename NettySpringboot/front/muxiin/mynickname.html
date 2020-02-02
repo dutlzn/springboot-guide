@@ -12,7 +12,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav title">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
-			<a id="openMenu" class="mui-icon mui-icon-right-nav mui-pull-right" style="color: white;
+			<a id="link_submit_nickname" class="mui-icon mui-icon-right-nav mui-pull-right" style="color: white;
 				font-size: 14px;line-height: 25px;">完成</a>
 			<h1 class="mui-title title-color">设置昵称</h1>
 		</header>
@@ -35,6 +35,45 @@
 				var mynickname = user.nickname;
 				var txt_nickname = document.getElementById("txt_nickname");
 				txt_nickname.value = mynickname;
+				// 提交事件，修改昵称
+				var link_submit_nickname = document.getElementById("link_submit_nickname");
+				link_submit_nickname.addEventListener("tap", function(){
+					var newNickname = txt_nickname.value;
+				    if(newNickname.length < 1) {
+						app.showToast("昵称长度太短","error");
+						return false;
+					}
+					if(newNickname.length > 8) {
+						app.showToast("昵称不能超过8位","error");
+						return false;
+					}
+					plus.nativeUI.showWaiting("请等待...");
+					mui.ajax(app.serverUrl + "/u/setNickname",{
+						data:{
+							userId:user.id,
+							nickname: newNickname
+						},
+						dataType:'json',//服务器返回json格式数据
+						type:'post',//HTTP请求类型
+						timeout:10000,//超时时间设置为10秒；
+						headers:{'Content-Type':'application/json'},	              
+						success:function(data){
+							plus.nativeUI.closeWaiting();
+							if (data.status == 200) {
+								var userInfoJson = data.data;
+								app.setUserGlobalInfo(userInfoJson);
+							    // 触发另外一个webview的自定义事件，可以使用 mui.fire()
+								var feige_meWebview = plus.webview.getWebviewById("feige-me.html");
+								mui.fire(feige_meWebview, "refresh");
+								// 页面跳转
+								mui.back();
+//								mui.openWindow("index.html", "index.html");
+							} else {
+								app.showToast(data.msg, "error");
+							}
+						}
+					});
+				});
 			})
 		</script>
 	</body>

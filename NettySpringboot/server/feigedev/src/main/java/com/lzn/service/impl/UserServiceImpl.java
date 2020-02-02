@@ -5,13 +5,19 @@ import com.lzn.org.n3r.idworker.Sid;
 import com.lzn.pojo.Users;
 import com.lzn.service.UserService;
 
+import com.lzn.utils.FastDFSClient;
+import com.lzn.utils.FileUtils;
+import com.lzn.utils.QRCodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.*;
 import tk.mybatis.mapper.util.Sqls;
+
+import java.io.IOException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,6 +25,10 @@ public class UserServiceImpl implements UserService {
     private UsersMapper usersMapper;
     @Autowired
     private Sid sid;
+    @Autowired
+    private QRCodeUtils qrCodeUtils;
+    @Autowired
+    private FastDFSClient fastDFSClient;
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -46,11 +56,18 @@ public class UserServiceImpl implements UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Users saveUser(Users user) {
-//        user.setFaceImageBig("");
-//        user.setFaceImage("");
-        // TODO:为每一个用户生成一个唯一的二维码
-        user.setQrcode("");
+        // feige_qrcode:[username] 复杂的扫码是有加密
         String userId = sid.nextShort();// 生成每个用户的唯一id
+        String qrCodePath = "D://var//user"+userId+"qrcode.png";
+        qrCodeUtils.createQRCode(qrCodePath, "feige_qrcode:"+user.getUsername());
+        MultipartFile qrcCdeFile = FileUtils.fileToMultipart(qrCodePath);
+        String qrCodeUrl = "";
+        try {
+            qrCodeUrl = fastDFSClient.uploadQRCode(qrcCdeFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        user.setQrcode(qrCodeUrl);
         user.setId(userId);
         usersMapper.insert(user);
         return user;
