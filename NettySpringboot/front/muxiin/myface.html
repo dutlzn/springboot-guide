@@ -11,14 +11,13 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav title">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"
-		    	<!--style="color:white"></a>
-		    <a id="openMenu" class=" mui-icon mui-icon-right-nav mui-pull-right"
-		    	style="color:white">...</a>
-		    <h1 class="mui-title title-color">个人头像</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: white;"></a>
+			<a id="openMenu" class="mui-icon mui-icon-right-nav mui-pull-right" style="color: white;">…</a>
+			<h1 class="mui-title title-color">个人头像</h1>
 		</header>
+
 		<div class="mui-content">
-		    <img id="img_myface" src="image/bg.png" />
+			<img id="img_myface" src="image/face-default-cat.png" />
 		</div>
 		
 		<div id="sheet-myface" class="mui-popover mui-popover-bottom mui-popover-action ">
@@ -80,6 +79,7 @@
 				link_savePhoto.addEventListener("tap", function() {
 					plus.nativeUI.showWaiting("下载中.....");
 					var user = app.getUserGlobalInfo();
+					var img_myface = document.getElementById("img_myface");
 					var faceImage = user.faceImageBig;
 					var dtast = plus.downloader.createDownload(
 						app.imgServerUrl + faceImage,

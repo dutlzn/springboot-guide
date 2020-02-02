@@ -18,7 +18,8 @@
 	},
 	"feige-me.html": {
 		"refer": [
-			"myface.html"
+			"myface.html",
+			"mynickname.html"
 		]
 	},
 	"myface.html": {
