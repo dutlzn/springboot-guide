@@ -12,7 +12,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav title">
 		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"
-		    	style="color:white"></a>
+		    	<!--style="color:white"></a>
 		    <a id="openMenu" class=" mui-icon mui-icon-right-nav mui-pull-right"
 		    	style="color:white">...</a>
 		    <h1 class="mui-title title-color">个人头像</h1>
@@ -47,7 +47,7 @@
 				var user = app.getUserGlobalInfo();
 				var img_myface = document.getElementById("img_myface");
 				if(user!=null){
-					var faceImage = user.faceImage;
+					var faceImage = user.faceImageBig;
 					if(app.isNotNull(faceImage)){
 					    img_myface.src = app.imgServerUrl + faceImage;	
 					}

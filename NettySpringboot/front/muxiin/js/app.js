@@ -7,7 +7,7 @@ window.app = {
 	/**
 	 * 图片服务器url
 	 */
-	imgServerUrl:'',
+	imgServerUrl:'http://47.98.209.48:88/group1/',
 	
 	
 	/**
