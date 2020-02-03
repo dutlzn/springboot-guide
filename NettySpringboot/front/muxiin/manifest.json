@@ -150,7 +150,8 @@
 				"resources": [],
 				"refer": [
 					"myface.html",
-					"mynickname.html"
+					"mynickname.html",
+					"myQRCode.html"
 				],
 				"priority": 0
 			},
