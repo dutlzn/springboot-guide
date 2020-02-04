@@ -1,6 +1,7 @@
 package com.lzn.controller;
 
 import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.lzn.enums.SearchFriendsStatusEnum;
 import com.lzn.pojo.Users;
 import com.lzn.pojo.bo.UsersBO;
 import com.lzn.pojo.vo.UsersVO;
@@ -120,5 +121,34 @@ public class UserController {
         Users result = userService.updateUserInfo(user);
 
         return IMoocJSONResult.ok(result);
+    }
+
+    /**
+     * 搜索好友接口，根据账号做匹配查询而不是模糊查询
+     */
+    @PostMapping("/search")
+    public IMoocJSONResult searchUser(
+            String myUserId,
+            String friendUsername
+    ) throws Exception {
+        // 0.判断myUserId和 friendUsername不能为空
+        if (StringUtils.isBlank(myUserId)
+                || StringUtils.isBlank(friendUsername)) {
+            return IMoocJSONResult.errorMsg("");
+        }
+        // 前置条件-1.搜索的用户如果不存在 返回无此用户
+        // 前置条件-2.搜索的用户如果就是自己 返回不能添加自己
+        // 前置条件-3.搜索的用户如果已经添加 返回该用户已经是你的好友
+        // 前置条件-4.搜索的用户如果不存在 返回无此用户
+        Integer status = userService.preconditionSearchFriends(myUserId, friendUsername);
+        if(status == SearchFriendsStatusEnum.SUCCESS.status){
+            Users user = userService.queryUserInfoByUsername(friendUsername);
+            UsersVO usersVO = new UsersVO();
+            BeanUtils.copyProperties(usersVO, user);
+            return IMoocJSONResult.ok(usersVO);
+        }else{
+            String errorMsg =  SearchFriendsStatusEnum.getMsgByKey(status);
+            return IMoocJSONResult.errorMsg(errorMsg);
+        }
     }
 }

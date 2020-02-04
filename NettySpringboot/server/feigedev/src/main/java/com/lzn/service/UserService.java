@@ -32,4 +32,16 @@ public interface UserService {
      * @Description: 修改用户记录
      */
     public Users updateUserInfo(Users user);
+
+    /**
+     * 搜索朋友的前置条件
+     */
+    public Integer preconditionSearchFriends(
+            String myUserId,
+            String friendUsername);
+
+    /**
+     * 根据用户名查询用户对象
+     */
+    public Users queryUserInfoByUsername(String username);
 }

@@ -1,7 +1,10 @@
 package com.lzn.service.impl;
 
+import com.lzn.enums.SearchFriendsStatusEnum;
+import com.lzn.mapper.MyFriendsMapper;
 import com.lzn.mapper.UsersMapper;
 import com.lzn.org.n3r.idworker.Sid;
+import com.lzn.pojo.MyFriends;
 import com.lzn.pojo.Users;
 import com.lzn.service.UserService;
 
@@ -29,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private QRCodeUtils qrCodeUtils;
     @Autowired
     private FastDFSClient fastDFSClient;
+    @Autowired
+    private MyFriendsMapper myFriendsMapper;
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -71,6 +76,10 @@ public class UserServiceImpl implements UserService {
         usersMapper.insert(user);
         return user;
     }
+    @Transactional(propagation = Propagation.SUPPORTS)
+    private Users queryUserById(String userId) {
+        return usersMapper.selectByPrimaryKey(userId);
+    }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
@@ -80,8 +89,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
-    private Users queryUserById(String userId) {
-        return usersMapper.selectByPrimaryKey(userId);
+    @Override
+    public Integer preconditionSearchFriends(
+            String myUserId, String friendUsername) {
+        // 前置条件-1.搜索的用户如果不存在 返回无此用户
+        Users user = queryUserInfoByUsername(friendUsername);
+        if(user == null){
+            return SearchFriendsStatusEnum.USER_NOT_EXIST.status;
+        }
+        // 前置条件-2.搜索的用户如果就是自己 返回不能添加自己
+        if(user.getId() == myUserId){
+            return SearchFriendsStatusEnum.NOT_YOURSELF.status;
+        }
+        // 前置条件-3.搜索的用户如果已经添加 返回该用户已经是你的好友
+        Example mfe = new Example(MyFriends.class);
+        Criteria mfc = mfe.createCriteria();//创建查询条件
+        mfc.andEqualTo("myUserId",myUserId);
+        mfc.andEqualTo("myFriendUserId",user.getId());
+        MyFriends myFriends1 = myFriendsMapper.selectOneByExample(mfe);
+        if(myFriends1 != null){
+            return SearchFriendsStatusEnum.ALREADY_FRIENDS.status;
+        }
+        return SearchFriendsStatusEnum.SUCCESS.status;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Users queryUserInfoByUsername(String username){
+        Example ue = new Example(Users.class);
+        Criteria uc = ue.createCriteria();//创建查询条件
+        uc.andEqualTo("username", username);
+        return usersMapper.selectOneByExample(ue);
     }
 
 }
