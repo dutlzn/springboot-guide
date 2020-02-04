@@ -48,7 +48,17 @@
 						success:function(data){
 							plus.nativeUI.closeWaiting();
 							if (data.status == 200) {
-								console.log("1234");
+								console.log(JSON.stringify(data.data));
+								mui.openWindow({
+									url: "searchFriendsResult.html",
+									id: "searchFriendsResult.html",
+									style: {},
+									extras: {
+										// 页面之间传参
+										willBeFriend: data.data
+									}
+								    
+								});
 							} else {
 								app.showToast(data.msg, "error");
 								console.log(data.msg);

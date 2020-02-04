@@ -143,7 +143,7 @@ public class UserController {
         if (status == SearchFriendsStatusEnum.SUCCESS.status) {
             Users user = userService.queryUserInfoByUsername(friendUsername);
             UsersVO userVO = new UsersVO();
-            BeanUtils.copyProperties(user, userVO);
+            BeanUtils.copyProperties(userVO,user);
             return IMoocJSONResult.ok(userVO);
         } else {
             String errorMsg = SearchFriendsStatusEnum.getMsgByKey(status);
