@@ -161,6 +161,13 @@
 					"plugin/v3.1.6/myface-uploader.html"
 				],
 				"priority": 0
+			},
+			"feige-discover.html": {
+				"resources": [],
+				"refer": [
+					"searchFriend.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

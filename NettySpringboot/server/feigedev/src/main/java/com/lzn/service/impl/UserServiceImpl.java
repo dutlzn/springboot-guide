@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
             return SearchFriendsStatusEnum.USER_NOT_EXIST.status;
         }
         // 前置条件-2.搜索的用户如果就是自己 返回不能添加自己
-        if(user.getId() == myUserId){
+        if(user.getId().equals(myUserId)){
             return SearchFriendsStatusEnum.NOT_YOURSELF.status;
         }
         // 前置条件-3.搜索的用户如果已经添加 返回该用户已经是你的好友
