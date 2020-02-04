@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public boolean queryUsernameIsExist(String username) {
-
         Users user = new Users();
         user.setUsername(username);
 
@@ -84,4 +83,5 @@ public class UserServiceImpl implements UserService {
     private Users queryUserById(String userId) {
         return usersMapper.selectByPrimaryKey(userId);
     }
+
 }
