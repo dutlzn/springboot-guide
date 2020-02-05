@@ -44,4 +44,9 @@ public interface UserService {
      * 根据用户名查询用户对象
      */
     public Users queryUserInfoByUsername(String username);
+
+    /**
+     * 添加好友请求记录，保存到数据库
+     */
+    public void sendFriendRequest(String myUserId,String friendUsername);
 }

@@ -1,9 +1,11 @@
 package com.lzn.service.impl;
 
 import com.lzn.enums.SearchFriendsStatusEnum;
+import com.lzn.mapper.FriendsRequestMapper;
 import com.lzn.mapper.MyFriendsMapper;
 import com.lzn.mapper.UsersMapper;
 import com.lzn.org.n3r.idworker.Sid;
+import com.lzn.pojo.FriendsRequest;
 import com.lzn.pojo.MyFriends;
 import com.lzn.pojo.Users;
 import com.lzn.service.UserService;
@@ -21,6 +23,7 @@ import tk.mybatis.mapper.entity.Example.*;
 import tk.mybatis.mapper.util.Sqls;
 
 import java.io.IOException;
+import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,6 +37,8 @@ public class UserServiceImpl implements UserService {
     private FastDFSClient fastDFSClient;
     @Autowired
     private MyFriendsMapper myFriendsMapper;
+    @Autowired
+    private FriendsRequestMapper friendsRequestMapper;
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -120,6 +125,29 @@ public class UserServiceImpl implements UserService {
         Criteria uc = ue.createCriteria();//创建查询条件
         uc.andEqualTo("username", username);
         return usersMapper.selectOneByExample(ue);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void sendFriendRequest(String myUserId, String friendUsername) {
+        // 根据用户名把朋友信息查询出来
+        Users friend = queryUserInfoByUsername(friendUsername);
+        // 1 查询发送好友请求记录表
+        Example fre = new Example(FriendsRequest.class);
+        Criteria frc = fre.createCriteria();//创建查询条件
+        frc.andEqualTo("sendUserId", myUserId);
+        frc.andEqualTo("acceptUserId", friend.getId());
+        FriendsRequest friendsRequest = friendsRequestMapper.selectOneByExample(fre);
+        if(friendsRequest == null){
+            // 2. 如果不是你的好友，并且好友记录没有添加，则新增好友请求记录
+            String requestId = sid.nextShort();
+            FriendsRequest request = new FriendsRequest();
+            request.setId(requestId);
+            request.setSendUserId(myUserId);
+            request.setAcceptUserId(friend.getId());
+            request.setRequestDateTime(new Date());
+            friendsRequestMapper.insert(request);
+        }
     }
 
 }
