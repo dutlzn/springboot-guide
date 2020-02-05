@@ -4,10 +4,12 @@ import com.lzn.enums.SearchFriendsStatusEnum;
 import com.lzn.mapper.FriendsRequestMapper;
 import com.lzn.mapper.MyFriendsMapper;
 import com.lzn.mapper.UsersMapper;
+import com.lzn.mapper.UsersMapperCustom;
 import com.lzn.org.n3r.idworker.Sid;
 import com.lzn.pojo.FriendsRequest;
 import com.lzn.pojo.MyFriends;
 import com.lzn.pojo.Users;
+import com.lzn.pojo.vo.FriendRequestVO;
 import com.lzn.service.UserService;
 
 import com.lzn.utils.FastDFSClient;
@@ -24,11 +26,14 @@ import tk.mybatis.mapper.util.Sqls;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UsersMapper usersMapper;
+    @Autowired
+    private UsersMapperCustom usersMapperCustom;
     @Autowired
     private Sid sid;
     @Autowired
@@ -148,6 +153,12 @@ public class UserServiceImpl implements UserService {
             request.setRequestDateTime(new Date());
             friendsRequestMapper.insert(request);
         }
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<FriendRequestVO> queryFriendRequestList(String acceptUserId) {
+        return usersMapperCustom.queryFriendRequestList(acceptUserId);
     }
 
 }

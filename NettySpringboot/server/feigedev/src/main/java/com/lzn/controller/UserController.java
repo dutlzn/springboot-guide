@@ -150,7 +150,9 @@ public class UserController {
             return IMoocJSONResult.errorMsg(errorMsg);
         }
     }
-
+    /**
+     * @Description: 发送添加好友的请求
+     */
     @PostMapping("/addFriendRequest")
     public IMoocJSONResult addFriendRequest(String myUserId, String friendUsername)
             throws Exception {
@@ -175,5 +177,16 @@ public class UserController {
         return IMoocJSONResult.ok();
     }
 
+    /**
+     *发送添加好友的请求
+     */
+    public IMoocJSONResult queryFriendRequestList(String userId){
+        // 0 判断是不是为空
+        if(StringUtils.isBlank(userId)){
+            return IMoocJSONResult.errorMsg("不能为空");
+        }
+        // 1 查询用户接受到的朋友申请列表
+        return IMoocJSONResult.ok(userService.queryFriendRequestList(userId));
+    }
 
 }

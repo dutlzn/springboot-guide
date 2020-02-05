@@ -1,6 +1,9 @@
 package com.lzn.service;
 
 import com.lzn.pojo.Users;
+import com.lzn.pojo.vo.FriendRequestVO;
+
+import java.util.List;
 
 public interface UserService {
     /**
@@ -49,4 +52,9 @@ public interface UserService {
      * 添加好友请求记录，保存到数据库
      */
     public void sendFriendRequest(String myUserId,String friendUsername);
+
+    /**
+     *  查询好友申请
+     */
+    public List<FriendRequestVO> queryFriendRequestList(String acceptUserId);
 }
