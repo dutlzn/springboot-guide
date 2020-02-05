@@ -178,8 +178,9 @@ public class UserController {
     }
 
     /**
-     *发送添加好友的请求
+     * @Description: 发送添加好友的请求
      */
+    @PostMapping("/queryFriendRequests")
     public IMoocJSONResult queryFriendRequestList(String userId){
         // 0 判断是不是为空
         if(StringUtils.isBlank(userId)){
