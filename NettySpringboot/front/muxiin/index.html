@@ -105,7 +105,20 @@
 	   	    	}
 	   	    }
 	   	});
+		
+		// 延时加载
+		setTimeout("initData()", "500");
 	   });
+	   
+		// 预加载
+		function initData() {
+			var feige_chatlist = plus.webview.getWebviewById("feige-chatlist.html");
+			mui.fire(feige_chatlist, "refresh");
+			
+			var feige_me = plus.webview.getWebviewById("feige-me.html");
+			mui.fire(feige_me, "refresh");
+		}
+	   		
 	   
 	   
 	</script>

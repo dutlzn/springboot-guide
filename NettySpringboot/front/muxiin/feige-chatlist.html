@@ -56,6 +56,11 @@
 				thisWebview.addEventListener("show", function(){
 					loadingFriendRequests();
 				});
+				// 添加自定义事件，刷新好友请求，初始化websocket
+				window.addEventListener("refresh", function(){
+					loadingFriendRequests();
+					// CHAT.init();
+				});
 			});
 // 加载好友请求记录列表
 			function loadingFriendRequests(){
