@@ -249,8 +249,30 @@
 						if (msg_text_val.length === 0) {
 							return;
 						}
+						// 发送消息, 渲染消息的html到msg div之下
+						sendMsg(app.imgServerUrl + me.faceImage, msg_text_val);
+						// 情况消息文本框中的内容
+						msg_text.value = "";
+						// 发送消息完毕之后，把发送按钮的颜色改为灰白色
+						send.setAttribute("class", "mui-btn-gray");
 					});
 				});
+			// 发送消息
+				function sendMsg(faceImg, msg) {
+					
+					var msgHtml = '<div class="me_lists">' +
+									'<div class="header_img">' +
+										'<img src="' + faceImg + '" width="40px" height="40px" />' +
+									'</div>' +
+									'<div class="msg-wrapper left">' +
+										'<p class="msg-right-green">' + msg + '</p>' +
+									'</div>' +
+								  '</div>';
+					var msg_list = document.getElementById("msg");//插到最下面
+					msg_list.insertAdjacentHTML("beforeend", msgHtml);
+					
+					// playSendMsgSound();
+				}
 			    // 重新调整聊天窗口
 				function resizeScreen() {
 					var areaMsgList = document.getElementById("msg");
