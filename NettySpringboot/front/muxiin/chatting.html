@@ -197,6 +197,9 @@
 		<script src="js/mui.js"></script>
 		<script type="text/javascript">
 			mui.init();
+			var friendUserId;
+			var friendNickname;
+			var friendFaceImage;
 		    // 创建命名空间，只需要把自己的代码，写进入，那么外部就无法访问
 			(function($, doc) {
 				mui.plusReady(function() {
@@ -255,8 +258,27 @@
 						msg_text.value = "";
 						// 发送消息完毕之后，把发送按钮的颜色改为灰白色
 						send.setAttribute("class", "mui-btn-gray");
+						receiveMsg("模拟接受消息~~~~~~");
 					});
 				});
+			// 接受消息
+				function receiveMsg(msg) {
+					
+					var msgHtml = '<div class="friend_lists">' +
+										'<div class="header_img">' +
+											'<img src="' + app.imgServerUrl + friendFaceImage + '" width="40px" height="40px" />' +
+										'</div>' +
+										'<div class="msg-wrapper right">' +
+											'<p class="msg-left-white">' + msg + '</p>' +
+										'</div>' +
+								  '</div>'; 
+					
+					var msg_list = document.getElementById("msg");
+					msg_list.insertAdjacentHTML("beforeend", msgHtml);
+					
+					// playReceiveMsgSound();
+				}
+				
 			// 发送消息
 				function sendMsg(faceImg, msg) {
 					
