@@ -37,14 +37,58 @@
 				setTimeout("startScan()", "500");
 			});
 			var scan;
-			function onmarked(type, result) {
-				alert(text+result);
-			}
 			function startScan() {
-				scan = new plus.barcode.Barcode('scanComponent');
+				var styles = {
+					frameColor: "#128E12",
+					scanbarColor: "#0062CC",
+					background: ""
+				};
+				scan = new plus.barcode.Barcode('scanComponent',null, styles);
 				scan.onmarked = onmarked;
 				scan.start();
 			}		
+			function onmarked( type, result ) {
+				if (type === 0) {
+					var content = result.split("feige_qrcode:");
+					if (content.length != 2) {
+						mui.alert(result)
+					} else {
+						var friendUsername = content[1];
+						
+						var user = app.getUserGlobalInfo();
+						
+						plus.nativeUI.showWaiting("请稍后...");
+						mui.ajax(app.serverUrl + "/u/search?myUserId=" + user.id +
+										"&friendUsername=" + friendUsername, {
+							data:{},
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型
+							timeout:10000,//超时时间设置为10秒；
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+								//服务器返回响应
+								plus.nativeUI.closeWaiting();
+								
+								if (data.status == 200) {
+									
+									mui.openWindow({
+										url: "searchFriendsResult.html",
+										id: "searchFriendsResult.html",
+										styles: {},
+										extras: {
+											willBeFriend: data.data
+										}
+									});
+									
+								} else {
+									app.showToast(data.msg, "error");
+								}
+							}
+						});
+					}
+				}
+				scan.start();
+			}
 		</script>
 	</body>
 
