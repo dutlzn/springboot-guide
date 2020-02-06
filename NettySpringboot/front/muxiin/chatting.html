@@ -258,9 +258,13 @@
 						msg_text.value = "";
 						// 发送消息完毕之后，把发送按钮的颜色改为灰白色
 						send.setAttribute("class", "mui-btn-gray");
-						receiveMsg("模拟接受消息~~~~~~");
-					});
+						// receiveMsg("模拟接受消息~~~~~~");
+						// 调用websocket 发送消息到netty后端
+						var wsWebview = plus.webview.getWebviewById("feige-chatlist.html");
+						// 跨页面调用js
+					    wsWebview.evalJS("CHAT.chat('" + msg_text_val + "')");
 				});
+			});
 			// 接受消息
 				function receiveMsg(msg) {
 					

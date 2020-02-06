@@ -59,9 +59,49 @@
 				// 添加自定义事件，刷新好友请求，初始化websocket
 				window.addEventListener("refresh", function(){
 					loadingFriendRequests();
-					// CHAT.init();
+					CHAT.init();
 				});
+				CHAT.init();
 			});
+			
+			window.CHAT = {
+				socket: null,
+				init: function() {
+					//浏览器是否支持websocket
+					if(window.WebSocket){
+					// 如果当前的状态已经连接，那就不需要重复初始化websocket
+						if (CHAT.socket != null 
+							&& CHAT.socket != undefined 
+							&& CHAT.socket.readyState == WebSocket.OPEN) {
+							return false;
+						}	
+						CHAT.socket = new WebSocket(app.nettyServerUrl);
+						CHAT.socket.onopen = CHAT.wsopen;
+						CHAT.socket.onclose = CHAT.wsclose;
+						CHAT.socket.onerror = CHAT.wserror;
+						CHAT.socket.onmessage = CHAT.wsmessage;
+					} else{
+						alert("手机设备过旧，请升级手机系统");
+					}
+				},
+				chat: function(msg) {
+					CHAT.socket.send(msg);
+				},
+				wsopen: function() {
+					console.log("websocket连接已建立...");
+					
+				},
+				wsmessage: function(e) {
+					console.log("接受到消息:"+e.data);
+				},
+				wsclose: function() {
+					console.log("连接关闭...");
+				},
+				wserror: function() {
+					console.log("发生错误...");
+				}
+			};
+					
 // 加载好友请求记录列表
 			function loadingFriendRequests(){
 				// 获取用户全局对象
