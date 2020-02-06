@@ -219,10 +219,10 @@ public class UserController {
             userService.passFriendRequest(sendUserId, acceptUserId);
         }
 
-        // 4. 数据库查询好友列表
-//        List<MyFriendsVO> myFirends = userService.queryMyFriends(acceptUserId);
+//         4. 数据库查询好友列表
+        List<MyFriendsVO> myFirends = userService.queryMyFriends(acceptUserId);
 
-        return IMoocJSONResult.ok();
+        return IMoocJSONResult.ok(myFirends);
     }
 
 
