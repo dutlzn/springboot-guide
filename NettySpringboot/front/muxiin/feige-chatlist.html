@@ -105,7 +105,6 @@
 				}
 			// 操作好友请求
 			function operatorFriendRequest(userId, friendId, operType) {
-				console.log(friendId);
 				mui.ajax(app.serverUrl + "/u/operFriendRequest?acceptUserId=" + userId
 												+ "&sendUserId=" + friendId
 												+ "&operType=" + operType,{

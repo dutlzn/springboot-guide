@@ -41,8 +41,6 @@ window.app = {
 	 */
 	setUserGlobalInfo: function(user) {
 		var userInfoStr = JSON.stringify(user);
-		console.log("set");
-		console.log(userInfoStr);
 		plus.storage.setItem("userInfo", userInfoStr);
 	},
 	/**
@@ -50,8 +48,6 @@ window.app = {
 	 */
 	getUserGlobalInfo: function() {
 		var userInfoStr = plus.storage.getItem("userInfo");
-		console.log("get");
-		console.log(userInfoStr);
 //		return userInfoStr;
 		return JSON.parse(userInfoStr);
 
@@ -62,5 +58,15 @@ window.app = {
 	 */
 	clearUserGlobalInfo: function(){
 		plus.storage.clear();
+	},
+	
+	/**
+	 * 保存用户的联系人列表
+	 * @param {Object} contactList
+	 */
+	setContactList: function(contactList) {
+		var contactListStr = JSON.stringify(contactList);
+		plus.storage.setItem("contactList", contactListStr);
 	}
+	
 }

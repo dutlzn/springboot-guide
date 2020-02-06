@@ -47,6 +47,10 @@
 				window.addEventListener("refresh", function() {
 					refreshFace();
 				})
+				var muiWebview = plus.webview.currentWebview();
+				muiWebview.addEventListener("show", function(){
+					refreshFace();
+				})
 //				var user = app.getUserGlobalInfo();
 //				var img_myface = document.getElementById("img_myface");
 //				if(user!=null){
@@ -94,7 +98,6 @@
 								
 							} else{
 								app.showToast("下载错误...","error");
-								console.log("下载错误");
 							}
 						}
 					);
@@ -109,6 +112,7 @@
 					var faceImage = user.faceImageBig;
 					if(app.isNotNull(faceImage)){
 					    img_myface.src = app.imgServerUrl + faceImage;	
+						// console.log(app.imgServerUrl + faceImage);
 					}
 				}
 			}

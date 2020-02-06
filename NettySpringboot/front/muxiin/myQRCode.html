@@ -52,7 +52,7 @@
 				//获取屏幕的宽度，设置图片
 				var img_my_qrcode = document.getElementById("img_my_qrcode");
 				img_my_qrcode.src = app.imgServerUrl+qrcode;
-				console.log(app.imgServerUrl + qrcode)
+
 				
 				var img_myface = document.getElementById("img_myface");
 				img_myface.src = app.imgServerUrl + userface;
@@ -77,7 +77,7 @@
 							// 下载完成
 							if(status == 200) {
 								plus.nativeUI.closeWaiting();
-								console.log("Download success: " + d.filename);
+			
 		
 								plus.gallery.save( d.filename, function () {
 									app.showToast( "保存图片到相册成功", "success" );
@@ -85,7 +85,7 @@
 		
 							} else {
 								plus.nativeUI.closeWaiting();
-								console.log("Download failed: " + status);
+								
 							}
 						});
 					dtask.start();

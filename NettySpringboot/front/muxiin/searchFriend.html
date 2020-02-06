@@ -36,8 +36,6 @@
 				link_submit_search.addEventListener("tap", function() {
 					var yourFriendUsername = txt_your_friend_username.value;
 				    plus.nativeUI.showWaiting("请等待...");
-				    console.log(user.id);
-				    console.log(yourFriendUsername);
 					mui.ajax(app.serverUrl + "/u/search?myUserId=" + user.id +
 									"&friendUsername=" + yourFriendUsername,{
 						data:{},
@@ -48,7 +46,7 @@
 						success:function(data){
 							plus.nativeUI.closeWaiting();
 							if (data.status == 200) {
-								console.log(JSON.stringify(data.data));
+					
 								mui.openWindow({
 									url: "searchFriendsResult.html",
 									id: "searchFriendsResult.html",
@@ -61,7 +59,7 @@
 								});
 							} else {
 								app.showToast(data.msg, "error");
-								console.log(data.msg);
+					
 							}
 						}
 					});
