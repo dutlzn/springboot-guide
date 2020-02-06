@@ -47,6 +47,140 @@
 						<p class="msg-right-green">好的，没问题！时间地点？</p>
 					</div>
 				</div>
+				<div class="friend_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper right">
+						<p class="msg-left-white">晚上过来吃饭？</p>
+					</div>
+				</div>
+				
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="friend_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper right">
+						<p class="msg-left-white">晚上过来吃饭？</p>
+					</div>
+				</div>
+				
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="friend_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper right">
+						<p class="msg-left-white">晚上过来吃饭？</p>
+					</div>
+				</div>
+				
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="friend_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper right">
+						<p class="msg-left-white">晚上过来吃饭？</p>
+					</div>
+				</div>
+				
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="friend_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper right">
+						<p class="msg-left-white">晚上过来吃饭？</p>
+					</div>
+				</div>
+				
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="friend_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper right">
+						<p class="msg-left-white">晚上过来吃饭？</p>
+					</div>
+				</div>
+				
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
+				<div class="me_lists">
+					<div class="header_img">
+						<img src="image/face-default-cat.png" width="40px" height="40px" />
+					</div>
+					<div class="msg-wrapper left">
+						<p class="msg-right-green">好的，没问题！时间地点？</p>
+					</div>
+				</div>
 
 			</div>
 		</div>
@@ -59,9 +193,73 @@
 				<button type="button" class="mui-btn mui-btn-gray" id="send">发送</button>
 			</label>
 		</footer>
+		<script src="js/app.js"></script>
 		<script src="js/mui.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
+		    // 创建命名空间，只需要把自己的代码，写进入，那么外部就无法访问
+			(function($, doc) {
+				mui.plusReady(function() {
+					// 获取我自己的用户信息
+					var me = app.getUserGlobalInfo();
+			     	// 获取聊天页面webview
+					var chattingWebview = plus.webview.currentWebview();
+					// 设置聊天页面的软键盘样式
+					chattingWebview.setStyle({
+						softinputMode: "adjustResize"
+					});
+					// 获取上一个页面传入的好友属性值
+					friendUserId = chattingWebview.friendUserId;
+					friendNickname = chattingWebview.friendNickname;
+					friendFaceImage = chattingWebview.friendFaceImage;
+					// 标题改为朋友的昵称
+					document.getElementById("chatting-nickname").innerHTML = friendNickname;
+					var areaMsgList = document.getElementById("msg");
+					// 设置聊天记录进入页面的时候自动滚动到最后一条
+				    areaMsgList.scrollTop = areaMsgList.scrollHeight + areaMsgList.offsetHeight;
+					// 获取dom控件
+					var msg_text = document.getElementById("msg-text");
+					var send = document.getElementById("send");
+							
+					// 监听用户输入，使得send按钮变色
+					msg_text.addEventListener("input", function(){
+					var msg_text_val = msg_text.value;
+					if (msg_text_val.length > 0) {
+						send.setAttribute("class", "mui-btn-green");
+					} else {
+						send.setAttribute("class", "mui-btn-gray");
+					}
+				    });
+				    // 对当前的窗口监听resize事件
+					window.addEventListener("resize", function(){
+						resizeScreen();
+						document.getElementById("msg-outter").style.paddingBottom = "50px";
+					});
+					// 发送消息按钮的事件绑定
+					send.addEventListener("tap", function(){
+						// 发送之前判断网络的状态
+						var connectionStatus = plus.networkinfo.getCurrentType();
+						if (connectionStatus == 0 || connectionStatus == 1) {
+							app.showToast("请打开网络连接...", "error");
+							return;
+						}
+						// 获取消息内容
+						var msg_text_val = msg_text.value;
+						// 判断消息内容，如果长度等于0，则return
+						if (msg_text_val.length === 0) {
+							return;
+						}
+					});
+				});
+			    // 重新调整聊天窗口
+				function resizeScreen() {
+					var areaMsgList = document.getElementById("msg");
+					// 设置聊天记录进入页面的时候自动滚动到最后一条
+					areaMsgList.scrollTop = areaMsgList.scrollHeight + areaMsgList.offsetHeight;
+				};
+		
+			}(mui, document))
+				
 		</script>
 	</body>
 

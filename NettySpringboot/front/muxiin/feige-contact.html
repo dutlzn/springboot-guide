@@ -180,11 +180,11 @@
 				// 打开聊天子页面
 				mui.openWindow({
 					url: "chatting.html",
-					id: "chatting.html",//+ friendUserId,	// 每个朋友的聊天页面都是唯一对应的
+					id: "chatting-" + friendUserId,	// 每个朋友的聊天页面都是唯一对应的
 					extras: {
-						// friendUserId: friendUserId,
-						// friendNickname: friendNickname,
-						// friendFaceImage: friendFaceImage
+						friendUserId: friendUserId,
+						friendNickname: friendNickname,
+						friendFaceImage: friendFaceImage
 					}
 				});
 				
