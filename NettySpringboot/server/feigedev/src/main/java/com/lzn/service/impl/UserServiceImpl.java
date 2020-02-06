@@ -10,6 +10,7 @@ import com.lzn.pojo.FriendsRequest;
 import com.lzn.pojo.MyFriends;
 import com.lzn.pojo.Users;
 import com.lzn.pojo.vo.FriendRequestVO;
+import com.lzn.pojo.vo.MyFriendsVO;
 import com.lzn.service.UserService;
 
 import com.lzn.utils.FastDFSClient;
@@ -188,4 +189,10 @@ public class UserServiceImpl implements UserService {
         myFriendsMapper.insert(myFriends);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<MyFriendsVO> queryMyFriends(String userId) {
+        List<MyFriendsVO> myFirends = usersMapperCustom.queryMyFriends(userId);
+        return myFirends;
+    }
 }

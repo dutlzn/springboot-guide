@@ -5,6 +5,7 @@ import com.lzn.enums.OperatorFriendRequestTypeEnum;
 import com.lzn.enums.SearchFriendsStatusEnum;
 import com.lzn.pojo.Users;
 import com.lzn.pojo.bo.UsersBO;
+import com.lzn.pojo.vo.MyFriendsVO;
 import com.lzn.pojo.vo.UsersVO;
 import com.lzn.service.UserService;
 import com.lzn.utils.FastDFSClient;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("u")
@@ -221,5 +224,23 @@ public class UserController {
 
         return IMoocJSONResult.ok();
     }
+
+
+    /**
+     * @Description: 查询我的好友列表
+     */
+    @PostMapping("/myFriends")
+    public IMoocJSONResult myFriends(String userId) {
+        // 0. userId 判断不能为空
+        if (StringUtils.isBlank(userId)) {
+            return IMoocJSONResult.errorMsg("用户id不能为空");
+        }
+
+        // 1. 数据库查询好友列表
+        List<MyFriendsVO> myFirends = userService.queryMyFriends(userId);
+
+        return IMoocJSONResult.ok(myFirends);
+    }
+
 
 }

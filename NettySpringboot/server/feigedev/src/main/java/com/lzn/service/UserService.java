@@ -2,6 +2,7 @@ package com.lzn.service;
 
 import com.lzn.pojo.Users;
 import com.lzn.pojo.vo.FriendRequestVO;
+import com.lzn.pojo.vo.MyFriendsVO;
 
 import java.util.List;
 
@@ -70,4 +71,9 @@ public interface UserService {
      * 				3. 删除好友请求记录
      */
     public void passFriendRequest(String sendUserId, String acceptUserId);
+
+    /**
+     * @Description: 查询好友列表
+     */
+    public List<MyFriendsVO> queryMyFriends(String userId);
 }
