@@ -276,7 +276,7 @@
 					var msg_list = document.getElementById("msg");
 					msg_list.insertAdjacentHTML("beforeend", msgHtml);
 					
-					// playReceiveMsgSound();
+					playReceiveMsgSound();
 				}
 				
 			// 发送消息
@@ -293,7 +293,19 @@
 					var msg_list = document.getElementById("msg");//插到最下面
 					msg_list.insertAdjacentHTML("beforeend", msgHtml);
 					
-					// playSendMsgSound();
+					playSendMsgSound();
+				}
+
+			// 播放发送消息的铃声
+				function playSendMsgSound() {
+					var audioPlayer = plus.audio.createPlayer("/mp3/send.mp3");
+					audioPlayer.play();
+				}
+				
+				// 播放接受消息的铃声
+				function playReceiveMsgSound() {
+					var audioPlayer = plus.audio.createPlayer("/mp3/di_didi.mp3");
+					audioPlayer.play();
 				}
 			    // 重新调整聊天窗口
 				function resizeScreen() {
