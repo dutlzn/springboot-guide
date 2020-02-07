@@ -201,7 +201,7 @@
 			var friendNickname;
 			var friendFaceImage;
 		    // 创建命名空间，只需要把自己的代码，写进入，那么外部就无法访问
-			(function($, doc) {
+			// (function($, doc) {
 				mui.plusReady(function() {
 					// 获取我自己的用户信息
 					var me = app.getUserGlobalInfo();
@@ -261,6 +261,7 @@
 						// receiveMsg("模拟接受消息~~~~~~");
 						// 调用websocket 发送消息到netty后端
 						var wsWebview = plus.webview.getWebviewById("feige-chatlist.html");
+						// TODO 发送消息
 						// 跨页面调用js
 					    wsWebview.evalJS("CHAT.chat('" + msg_text_val + "')");
 				});
@@ -318,7 +319,7 @@
 					areaMsgList.scrollTop = areaMsgList.scrollHeight + areaMsgList.offsetHeight;
 				};
 		
-			}(mui, document))
+			// }(mui, document))
 				
 		</script>
 	</body>

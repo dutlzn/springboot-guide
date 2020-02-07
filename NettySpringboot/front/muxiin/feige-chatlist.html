@@ -89,10 +89,17 @@
 				},
 				wsopen: function() {
 					console.log("websocket连接已建立...");
+					// var chatWebview = plus.webview.getWebviewById("chatting-" + friendUserId);
 					
 				},
 				wsmessage: function(e) {
 					console.log("接受到消息:"+e.data);
+					// 调用聊天webview的receiveMsg方法
+					// 调用聊天webview的receiveMsg方法
+					var chatWebview = plus.webview.getWebviewById("chatting-200206A4CCMNZ354");
+					chatWebview.evalJS("receiveMsg('" + e.data + "')");
+					chatWebview.evalJS("resizeScreen()");
+					
 				},
 				wsclose: function() {
 					console.log("连接关闭...");
