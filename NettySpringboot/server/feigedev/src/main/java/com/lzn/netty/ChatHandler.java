@@ -59,12 +59,15 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         // 获取客户端传输过来的消息
         String content = msg.text();
         System.out.println("接受到的消息:" + content);
+        Channel currentChannel = ctx.channel();
         // 1. 获取客户端发来的消息
         DataContent dataContent = JsonUtils.jsonToPojo(content, DataContent.class);
         Integer action = dataContent.getAction();
         // 2. 判断消息类型，根据不同的类型来处理不同的业务
         if (action == MsgActionEnum.CONNECT.type) {
             // 	2.1  当websocket 第一次open的时候，初始化channel，把用的channel和userid关联起来
+            String senderId = dataContent.getChatMsg().getSenderId();
+            UserChannelRel.put(senderId, currentChannel);
         } else if (action == MsgActionEnum.CHAT.type) {
             //  2.2  聊天类型的消息，把聊天记录保存到数据库，同时标记消息的签收状态[未签收]
 
