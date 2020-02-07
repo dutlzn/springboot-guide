@@ -13,8 +13,11 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description: 处理消息的handler
@@ -102,6 +105,23 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             }
         } else if (action == MsgActionEnum.SIGNED.type) {
             //  2.3  签收消息类型，针对具体的消息进行签收，修改数据库中对应消息的签收状态[已签收]
+            UserService userService = (UserService)SpringUtil.getBean("userServiceImpl");
+            // 扩展字段在signed类型的消息中，代表需要去签收的消息id，逗号间隔
+            String msgIdsStr = dataContent.getExtand();
+            String msgIds[] = msgIdsStr.split(",");
+            List<String> msgIdList = new ArrayList<>();
+            for (String mid : msgIds) {
+                if (StringUtils.isNotBlank(mid)) {
+                    msgIdList.add(mid);
+                }
+            }
+
+            System.out.println(msgIdList.toString());//测试
+
+            if (msgIdList != null && !msgIdList.isEmpty() && msgIdList.size() > 0) {
+                // 批量签收
+                userService.updateMsgSigned(msgIdList);
+            }
         } else if (action == MsgActionEnum.KEEPALIVE.type) {
             //  2.4  心跳类型的消息
 

@@ -82,4 +82,11 @@ public interface UserService {
      * @Description: 保存聊天消息到数据库
      */
     public String saveMsg(ChatMsg chatMsg);
+
+
+    /**
+     * @Description: 批量签收消息
+     */
+    public void updateMsgSigned(List<String> msgIdList);
+
 }

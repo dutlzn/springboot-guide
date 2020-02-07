@@ -214,4 +214,12 @@ public class UserServiceImpl implements UserService {
 
         return msgId;
     }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void updateMsgSigned(List<String> msgIdList) {
+        usersMapperCustom.batchUpdateMsgSigned(msgIdList);
+    }
+
+
 }
