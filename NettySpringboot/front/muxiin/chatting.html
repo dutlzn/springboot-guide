@@ -258,12 +258,20 @@
 						msg_text.value = "";
 						// 发送消息完毕之后，把发送按钮的颜色改为灰白色
 						send.setAttribute("class", "mui-btn-gray");
+								
+						// 构建ChatMsg
+						var chatMsg = new app.ChatMsg(me.id, friendUserId, msg_text_val, null);
+						// 构建DataContent
+						var dataContent = new app.DataContent(app.CHAT, chatMsg, null);
+						
 						// receiveMsg("模拟接受消息~~~~~~");
 						// 调用websocket 发送消息到netty后端
 						var wsWebview = plus.webview.getWebviewById("feige-chatlist.html");
 						// TODO 发送消息
 						// 跨页面调用js
-					    wsWebview.evalJS("CHAT.chat('" + msg_text_val + "')");
+					    // wsWebview.evalJS("CHAT.chat('" + msg_text_val + "')");
+						wsWebview.evalJS("CHAT.chat('" + JSON.stringify(dataContent) + "')");
+						
 				});
 			});
 			// 接受消息
