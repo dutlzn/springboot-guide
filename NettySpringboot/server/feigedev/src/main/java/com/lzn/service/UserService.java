@@ -1,5 +1,6 @@
 package com.lzn.service;
 
+import com.lzn.netty.ChatMsg;
 import com.lzn.pojo.Users;
 import com.lzn.pojo.vo.FriendRequestVO;
 import com.lzn.pojo.vo.MyFriendsVO;
@@ -76,4 +77,9 @@ public interface UserService {
      * @Description: 查询好友列表
      */
     public List<MyFriendsVO> queryMyFriends(String userId);
+
+    /**
+     * @Description: 保存聊天消息到数据库
+     */
+    public String saveMsg(ChatMsg chatMsg);
 }

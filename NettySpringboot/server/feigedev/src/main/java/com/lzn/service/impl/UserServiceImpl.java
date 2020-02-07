@@ -1,10 +1,9 @@
 package com.lzn.service.impl;
 
+import com.lzn.enums.MsgSignFlagEnum;
 import com.lzn.enums.SearchFriendsStatusEnum;
-import com.lzn.mapper.FriendsRequestMapper;
-import com.lzn.mapper.MyFriendsMapper;
-import com.lzn.mapper.UsersMapper;
-import com.lzn.mapper.UsersMapperCustom;
+import com.lzn.mapper.*;
+import com.lzn.netty.ChatMsg;
 import com.lzn.org.n3r.idworker.Sid;
 import com.lzn.pojo.FriendsRequest;
 import com.lzn.pojo.MyFriends;
@@ -30,6 +29,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+    @Autowired
+    private ChatMsgMapper chatMsgMapper;
     @Autowired
     private UsersMapper usersMapper;
     @Autowired
@@ -194,5 +195,23 @@ public class UserServiceImpl implements UserService {
     public List<MyFriendsVO> queryMyFriends(String userId) {
         List<MyFriendsVO> myFirends = usersMapperCustom.queryMyFriends(userId);
         return myFirends;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public String saveMsg(ChatMsg chatMsg) {
+
+        com.lzn.pojo.ChatMsg msgDB = new com.lzn.pojo.ChatMsg();
+        String msgId = sid.nextShort();
+        msgDB.setId(msgId);
+        msgDB.setAcceptUserId(chatMsg.getReceiverId());
+        msgDB.setSendUserId(chatMsg.getSenderId());
+        msgDB.setCreateTime(new Date());
+        msgDB.setSignFlag(MsgSignFlagEnum.unsign.type);
+        msgDB.setMsg(chatMsg.getMsg());
+
+        chatMsgMapper.insert(msgDB);
+
+        return msgId;
     }
 }

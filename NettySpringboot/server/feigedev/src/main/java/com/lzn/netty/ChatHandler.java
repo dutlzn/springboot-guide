@@ -1,6 +1,8 @@
 package com.lzn.netty;
 
+import com.lzn.SpringUtil;
 import com.lzn.enums.MsgActionEnum;
+import com.lzn.service.UserService;
 import com.lzn.utils.JsonUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
@@ -70,7 +72,14 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             UserChannelRel.put(senderId, currentChannel);
         } else if (action == MsgActionEnum.CHAT.type) {
             //  2.2  聊天类型的消息，把聊天记录保存到数据库，同时标记消息的签收状态[未签收]
-
+            ChatMsg chatMsg = dataContent.getChatMsg();
+            String msgText = chatMsg.getMsg();
+            String receiverId = chatMsg.getReceiverId();
+            String senderId = chatMsg.getSenderId();
+            // 保存消息到数据库，并且标记为 未签收
+            UserService userService = (UserService)SpringUtil.getBean("userServiceImpl");
+            String msgId = userService.saveMsg(chatMsg);
+            chatMsg.setMsgId(msgId);
         } else if (action == MsgActionEnum.SIGNED.type) {
             //  2.3  签收消息类型，针对具体的消息进行签收，修改数据库中对应消息的签收状态[已签收]
         } else if (action == MsgActionEnum.KEEPALIVE.type) {
