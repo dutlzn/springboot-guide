@@ -1,5 +1,7 @@
 package com.lzn.netty;
 
+import com.lzn.enums.MsgActionEnum;
+import com.lzn.utils.JsonUtils;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -58,10 +60,19 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         String content = msg.text();
         System.out.println("接受到的消息:" + content);
         // 1. 获取客户端发来的消息
+        DataContent dataContent = JsonUtils.jsonToPojo(content, DataContent.class);
+        Integer action = dataContent.getAction();
         // 2. 判断消息类型，根据不同的类型来处理不同的业务
-        // 	2.1  当websocket 第一次open的时候，初始化channel，把用的channel和userid关联起来
-        //  2.2  聊天类型的消息，把聊天记录保存到数据库，同时标记消息的签收状态[未签收]
-        //  2.3  签收消息类型，针对具体的消息进行签收，修改数据库中对应消息的签收状态[已签收]
-        //  2.4  心跳类型的消息
+        if (action == MsgActionEnum.CONNECT.type) {
+            // 	2.1  当websocket 第一次open的时候，初始化channel，把用的channel和userid关联起来
+        } else if (action == MsgActionEnum.CHAT.type) {
+            //  2.2  聊天类型的消息，把聊天记录保存到数据库，同时标记消息的签收状态[未签收]
+
+        } else if (action == MsgActionEnum.SIGNED.type) {
+            //  2.3  签收消息类型，针对具体的消息进行签收，修改数据库中对应消息的签收状态[已签收]
+        } else if (action == MsgActionEnum.KEEPALIVE.type) {
+            //  2.4  心跳类型的消息
+
+        }
     }
 }
