@@ -87,7 +87,13 @@ window.app = {
 		
 		return JSON.parse(contactListStr);
 	},
-	
+	/**
+	 * 登出后，移除用户全局对象
+	 */
+	userLogout: function() {
+		// plus.storage.clear();
+		plus.storage.removeItem("userInfo");
+	},
 	
 	/**
 	 * 和后端的枚举对应

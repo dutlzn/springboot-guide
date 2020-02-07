@@ -1,9 +1,12 @@
 package com.lzn.service.impl;
 
+import com.lzn.enums.MsgActionEnum;
 import com.lzn.enums.MsgSignFlagEnum;
 import com.lzn.enums.SearchFriendsStatusEnum;
 import com.lzn.mapper.*;
 import com.lzn.netty.ChatMsg;
+import com.lzn.netty.DataContent;
+import com.lzn.netty.UserChannelRel;
 import com.lzn.org.n3r.idworker.Sid;
 import com.lzn.pojo.FriendsRequest;
 import com.lzn.pojo.MyFriends;
@@ -14,6 +17,7 @@ import com.lzn.service.UserService;
 
 import com.lzn.utils.FastDFSClient;
 import com.lzn.utils.FileUtils;
+import com.lzn.utils.JsonUtils;
 import com.lzn.utils.QRCodeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +30,10 @@ import tk.mybatis.mapper.entity.Example.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
+import io.netty.channel.Channel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -179,6 +186,16 @@ public class UserServiceImpl implements UserService {
         saveFriends(sendUserId, acceptUserId);
         saveFriends(acceptUserId, sendUserId);
         deleteFriendRequest(sendUserId, acceptUserId);
+        Channel sendChannel = UserChannelRel.get(sendUserId);
+        if (sendChannel != null) {
+            // 使用websocket主动推送消息到请求发起者，更新他的通讯录列表为最新
+            DataContent dataContent = new DataContent();
+            dataContent.setAction(MsgActionEnum.PULL_FRIEND.type);
+
+            sendChannel.writeAndFlush(
+                    new TextWebSocketFrame(
+                            JsonUtils.objectToJson(dataContent)));
+        }
     }
 
     private void saveFriends(String sendUserId, String acceptUserId){

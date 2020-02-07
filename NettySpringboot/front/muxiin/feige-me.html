@@ -96,6 +96,13 @@
 				link_my_qrcode.addEventListener("tap", function(){
 					mui.openWindow("myQRCode.html", "myQRCode.html")
 				})
+						
+				// 用户退出
+				var link_logout = document.getElementById("link_logout");
+				link_logout.addEventListener("tap", function(){
+					app.userLogout();
+					mui.openWindow("login.html", "login.html");
+				});
 				// 添加自定义事件 刷新头像
 				window.addEventListener("refresh", function() {
 					refreshUserInfo();
