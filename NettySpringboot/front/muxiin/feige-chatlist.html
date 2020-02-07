@@ -85,6 +85,19 @@
 					}
 				},
 				chat: function(msg) {
+				// 如果当前websocket的状态是已打开，则直接发送， 否则重连
+					if (CHAT.socket != null 
+							&& CHAT.socket != undefined  
+							&& CHAT.socket.readyState == WebSocket.OPEN) {
+							CHAT.socket.send(msg);
+					} else {
+						// 重连websocket
+						CHAT.init();
+						setTimeout("CHAT.reChat('" + msg + "')", "1000");
+					}
+				},
+				reChat: function(msg) {
+					console.log("消息重新发送...");
 					CHAT.socket.send(msg);
 				},
 				wsopen: function() {
