@@ -61,7 +61,7 @@
 					loadingFriendRequests();
 					CHAT.init();
 				});
-				CHAT.init();
+				// CHAT.init();
 			});
 			
 			window.CHAT = {
@@ -112,12 +112,23 @@
 					CHAT.chat(JSON.stringify(dataContent));
 				},
 				wsmessage: function(e) {
-					// console.log("接受到消息:"+e.data);
+					console.log("接受到消息:"+e.data);
+			 	  // 如果不是重新拉取好友列表，则获取聊天消息模型，渲染接收到的聊天记录
+				    var dataContent = JSON.parse(e.data);
+					var chatMsg = dataContent.chatMsg;
+					var msg = chatMsg.msg;
+					var friendUserId = chatMsg.senderId;
+					var myId = chatMsg.receiverId;
+
 					// 调用聊天webview的receiveMsg方法
-					// 调用聊天webview的receiveMsg方法
-					var chatWebview = plus.webview.getWebviewById("chatting-200206A4CCMNZ354");
-					chatWebview.evalJS("receiveMsg('" + e.data + "')");
-					chatWebview.evalJS("resizeScreen()");
+					// var chatWebview = plus.webview.getWebviewById("chatting-200206A4CCMNZ354");
+					var chatWebview = plus.webview.getWebviewById("chatting-" + friendUserId);
+					// chatWebview.evalJS("receiveMsg('" + e.data + "')");
+					// chatWebview.evalJS("resizeScreen()");
+					if (chatWebview != null) {
+						chatWebview.evalJS("receiveMsg('" + msg + "')");
+						chatWebview.evalJS("resizeScreen()");
+					}
 					
 				},
 				wsclose: function() {
