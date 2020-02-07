@@ -80,6 +80,26 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             UserService userService = (UserService)SpringUtil.getBean("userServiceImpl");
             String msgId = userService.saveMsg(chatMsg);
             chatMsg.setMsgId(msgId);
+
+            DataContent dataContentMsg = new DataContent();
+            dataContentMsg.setChatMsg(chatMsg);
+            // 发送消息
+            // 从全局用户Channel关系中获取接受方的channel
+            Channel receiverChannel = UserChannelRel.get(receiverId);
+            if (receiverChannel == null) {
+                // TODO channel为空代表用户离线，推送消息（JPush，个推，小米推送）
+            } else {
+                // 当receiverChannel不为空的时候，从ChannelGroup去查找对应的channel是否存在
+                Channel findChannel = users.find(receiverChannel.id());
+                if (findChannel != null) {
+                    // 用户在线
+                    receiverChannel.writeAndFlush(
+                            new TextWebSocketFrame(
+                                    JsonUtils.objectToJson(dataContentMsg)));
+                } else {
+                    // 用户离线 TODO 推送消息
+                }
+            }
         } else if (action == MsgActionEnum.SIGNED.type) {
             //  2.3  签收消息类型，针对具体的消息进行签收，修改数据库中对应消息的签收状态[已签收]
         } else if (action == MsgActionEnum.KEEPALIVE.type) {
