@@ -97,16 +97,22 @@
 					}
 				},
 				reChat: function(msg) {
-					console.log("消息重新发送...");
+					// console.log("消息重新发送...");
 					CHAT.socket.send(msg);
 				},
 				wsopen: function() {
-					console.log("websocket连接已建立...");
+					// console.log("websocket连接已建立...");
 					// var chatWebview = plus.webview.getWebviewById("chatting-" + friendUserId);
-					
+					var me = app.getUserGlobalInfo();
+					// 构建ChatMsg
+					var chatMsg = new app.ChatMsg(me.id, null, null, null);
+					// 构建DataContent
+					var dataContent = new app.DataContent(app.CONNECT, chatMsg, null);
+					// 发送websocket
+					CHAT.chat(JSON.stringify(dataContent));
 				},
 				wsmessage: function(e) {
-					console.log("接受到消息:"+e.data);
+					// console.log("接受到消息:"+e.data);
 					// 调用聊天webview的receiveMsg方法
 					// 调用聊天webview的receiveMsg方法
 					var chatWebview = plus.webview.getWebviewById("chatting-200206A4CCMNZ354");
@@ -115,10 +121,10 @@
 					
 				},
 				wsclose: function() {
-					console.log("连接关闭...");
+					// console.log("连接关闭...");
 				},
 				wserror: function() {
-					console.log("发生错误...");
+					// console.log("发生错误...");
 				}
 			};
 					
