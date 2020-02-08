@@ -200,16 +200,19 @@ public class UserController {
     @PostMapping("/operFriendRequest")
     public IMoocJSONResult operFriendRequest(String acceptUserId, String sendUserId,
                                              Integer operType){
+
         // 0. acceptUserId sendUserId operType 判断不能为空
         if (StringUtils.isBlank(acceptUserId)
                 || StringUtils.isBlank(sendUserId)
                 || operType == null) {
-            return IMoocJSONResult.errorMsg("不能为空");
+            return IMoocJSONResult.errorMsg("");
         }
+
         // 1. 如果operType 没有对应的枚举值，则直接抛出空错误信息
         if (StringUtils.isBlank(OperatorFriendRequestTypeEnum.getMsgByType(operType))) {
-            return IMoocJSONResult.errorMsg("操作类型不对");
+            return IMoocJSONResult.errorMsg("");
         }
+
         if (operType == OperatorFriendRequestTypeEnum.IGNORE.type) {
             // 2. 判断如果忽略好友请求，则直接删除好友请求的数据库表记录
             userService.deleteFriendRequest(sendUserId, acceptUserId);
@@ -219,7 +222,7 @@ public class UserController {
             userService.passFriendRequest(sendUserId, acceptUserId);
         }
 
-//         4. 数据库查询好友列表
+        // 4. 数据库查询好友列表
         List<MyFriendsVO> myFirends = userService.queryMyFriends(acceptUserId);
 
         return IMoocJSONResult.ok(myFirends);

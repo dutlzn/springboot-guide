@@ -121,7 +121,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
                 }
             }
 
-            System.out.println(msgIdList.toString());//测试
+//            System.out.println(msgIdList.toString());//测试
 
             if (msgIdList != null && !msgIdList.isEmpty() && msgIdList.size() > 0) {
                 // 批量签收

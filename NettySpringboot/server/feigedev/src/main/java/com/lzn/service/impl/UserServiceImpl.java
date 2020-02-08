@@ -186,7 +186,10 @@ public class UserServiceImpl implements UserService {
         saveFriends(sendUserId, acceptUserId);
         saveFriends(acceptUserId, sendUserId);
         deleteFriendRequest(sendUserId, acceptUserId);
+
         Channel sendChannel = UserChannelRel.get(sendUserId);
+        System.err.println("send:"+sendUserId);
+        System.err.println("sendChannel:"+sendChannel);
         if (sendChannel != null) {
             // 使用websocket主动推送消息到请求发起者，更新他的通讯录列表为最新
             DataContent dataContent = new DataContent();

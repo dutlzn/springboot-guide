@@ -91,7 +91,7 @@ window.app = {
 	 * 登出后，移除用户全局对象
 	 */
 	userLogout: function() {
-		// plus.storage.clear();
+		plus.storage.clear();
 		plus.storage.removeItem("userInfo");
 	},
 	
